@@ -440,3 +440,6 @@ demokey-dev
 ## 3， 读取不到配置中心的键值对。 
 比如提示找不到demokey， cannot find "${demoke}"  
 可能问题，两边的依赖的spring-boot-parent 不一致。  
+
+
+## 4， 如何动态刷新网页
