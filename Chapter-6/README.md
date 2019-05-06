@@ -443,3 +443,37 @@ demokey-dev
 
 
 ## 4， 如何动态刷新网页
+### 4.1 在客户端的 项目properties 中 加上如下配置。
+management.endpoints.web.exposure.include=refresh
+### 4.2 在controller 中加入如下配置。 
+@RefreshScope
+```java 
+package com.sydney.dream.chapter6.client;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RefreshScope
+public class HiController {
+    @Value("${demokey}")
+    String demokey;
+    @RequestMapping(value = "/hi")
+    public String hi(){
+        return demokey;
+    }
+}
+
+```
+### 4.3 修改githup 中的配置。 
+
+### 4.4 刷新配置
+注意是post 请求
+curl -X POST http://localhost:8881/actuator/refresh
+
+### 4.5 访问如下链接，可以看到配置刷新了。
+http://localhost:8881/hi  
+结果：  
+demokey-dev-test-reflesh1  
